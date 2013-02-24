@@ -1,8 +1,8 @@
 # YARD for JavaScript
 
-A YARD plugin that adds support for documenting JavaScript source files with
-minimal amount of manual declarations, support for YARD syntax, and templates
-for displaying HTML documentation.
+A [YARD](http://yardoc.org) plugin that adds support for documenting
+JavaScript source files with minimal amount of manual declarations, support
+for YARD syntax, and templates for displaying HTML documentation.
 
 The plugin relies on certain conventional syntaxes for declaring classes and
 mixins. See the "Generating documentation" section below for how to customize
