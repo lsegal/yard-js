@@ -34,7 +34,7 @@ module YARDJS
         return unless statement.callee.source =~
           YARDJS.options.update_class_expression
 
-        ns = P(statement.args.first.source)
+        ns = P(statement.args.first.source.gsub(/\.prototype/, ''))
         ensure_loaded!(ns)
         parse_block(statement.args.last.properties, :namespace => ns)
       end
