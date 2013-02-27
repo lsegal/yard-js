@@ -38,6 +38,7 @@ module YARDJS
       def register_docstring(object, docstring = statement.comments, stmt = statement)
         docstring = docstring.last if Array === docstring
         docstring = clean_comment(docstring) if docstring
+        docstring.force_encoding('utf-8')
 
         super(object, docstring, stmt)
       end
