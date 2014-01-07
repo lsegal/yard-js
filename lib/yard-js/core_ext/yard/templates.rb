@@ -16,6 +16,8 @@ module YARD
             title = h(object.relative_path(obj))
             if obj.is_a?(YARDJS::CodeObjects::PropertyObject) && obj.property_type == :function
               title += '()'
+            elsif obj.title != obj.path
+              title = h(obj.title)
             end
           else
             title = h(obj.to_s)
@@ -24,7 +26,7 @@ module YARD
           return title if obj.is_a?(CodeObjects::Proxy)
 
           link = url_for(obj, anchor, relative)
-          link = link ? link_url(link, title, :title => h("#{obj.path} (#{obj.type})")) : title
+          link = link ? link_url(link, title, :title => h("#{obj.title} (#{obj.type})")) : title
           "<span class='object_link'>" + link + "</span>"
         end
 
@@ -33,6 +35,7 @@ module YARD
           if meth.respond_to?(:object) && !meth.has_tag?(:return)
             meth = meth.object
           end
+          return unless meth
 
           type = options.default_return || ""
           if meth.tag(:return) && meth.tag(:return).types
@@ -65,7 +68,7 @@ module YARD
           name = meth.name.to_s
 
           if meth.constructor?
-            type, name = 'new ', meth.namespace.path
+            type, name = 'new ', meth.namespace.path.gsub(/_\d+/, '')
           end
 
           if meth.property_type == :function
