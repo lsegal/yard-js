@@ -74,7 +74,7 @@ To generate documentation for a project, change into the project directory
 and type:
 
 ```sh
-$ yard -m markdown -e /path/to/yard-js/lib/yard-js
+$ yard -m markdown -e /path/to/yard-js/lib/yard-js.rb
 ```
 
 To take advantage of class detection you will also need to customize the
