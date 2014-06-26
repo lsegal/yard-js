@@ -34,9 +34,11 @@ module YARDJS
         return unless statement.callee.source =~
           YARDJS.options.update_class_expression
 
+        ns = P(statement.args.first.source.gsub(/\.prototype/, ''))
+        ensure_loaded!(ns)
+
         statement.comments ||= parser.extra_state.comments
-        name = statement.args.first.source.gsub(/\.prototype/, '')
-        ns = register YARD::CodeObjects::ClassObject.new(:root, name)
+        register(ns) if statement.comments && statement.comments.size > 0
 
         parse_block(statement.args.last.properties, :namespace => ns)
       end
