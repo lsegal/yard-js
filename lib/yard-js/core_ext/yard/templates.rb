@@ -64,7 +64,7 @@ module YARD
 
           type = signature_types(meth, link)
           args = ''
-          prefix = '.'
+          prefix = ''
           name = meth.name.to_s
 
           if meth.constructor?
