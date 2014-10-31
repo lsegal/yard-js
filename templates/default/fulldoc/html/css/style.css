@@ -7,3 +7,4 @@
   background: #fcfcfc; border: 1px solid #eee; border-radius: 3px;
   margin-left: -15px; font-family: monospace; display: block; font-size: 1em;
 }
+.summary .note.title.event { font-size: 1.1em; font-family: monospace; }
