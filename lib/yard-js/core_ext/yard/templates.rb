@@ -64,10 +64,11 @@ module YARD
 
           type = signature_types(meth, link)
           args = ''
+          prefix = '.'
           name = meth.name.to_s
 
           if meth.constructor?
-            type, name = 'new ', meth.namespace.path.gsub(/_\d+/, '')
+            prefix, name = 'new ', meth.namespace.path.gsub(/_\d+/, '')
           end
 
           if meth.property_type == :function
@@ -95,7 +96,7 @@ module YARD
             extras_text = ' <span class="extras">(' + extras.join(", ") + ')</span>' unless extras.empty?
           end
 
-          title = "<strong>%s</strong>%s %s" % [h(name), args, type]
+          title = "%s<strong>%s</strong>%s %s" % [prefix, h(name), args, type]
 
           if link
             link_title = h(name)
