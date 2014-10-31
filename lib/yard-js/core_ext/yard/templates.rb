@@ -55,14 +55,13 @@ module YARD
           elsif !type.empty?
             type = link ? h(type) : format_types([type], false)
           end
-          type = "(#{type}) " unless type.empty?
+          type = "#{type} " unless type.empty?
           type
         end
 
         def signature(meth, link = true, show_extras = true, full_attr_name = true)
           meth = convert_method_to_overload(meth)
 
-          small_type = true
           type = signature_types(meth, link)
           args = ''
           name = meth.name.to_s
@@ -79,10 +78,11 @@ module YARD
           end
 
           if YARDJS::Tags::CallbackTag === meth
-            small_type = false
             type = ''
             args += ' { ... }'
           end
+
+          type = "&#x21d2; #{type}" if type && !type.empty?
 
           extras = []
           extras_text = ''
@@ -95,11 +95,7 @@ module YARD
             extras_text = ' <span class="extras">(' + extras.join(", ") + ')</span>' unless extras.empty?
           end
 
-          if small_type
-            title = "<small>%s</small><strong>%s</strong>%s" % [type, h(name), args]
-          else
-            title = "%s<strong>%s</strong>%s" % [type, h(name), args]
-          end
+          title = "<strong>%s</strong>%s %s" % [h(name), args, type]
 
           if link
             link_title = h(name)
